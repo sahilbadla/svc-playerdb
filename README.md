@@ -198,6 +198,7 @@ Trace logs can be accessed at http://localhost:8080/actuator/httptrace
 
 
 ##Further enhancements(out of scope for this demo)
+
 Although the project contains certain level of production readiness and production like structure, there are a couple more things that could be implemented to make it more efficient.
 Below are some of the example:
 
