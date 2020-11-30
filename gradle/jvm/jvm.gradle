@@ -1,0 +1,7 @@
+def profiles = 'local'
+
+bootRun {
+    // local profile will be picked by default. To override it, use ./gradlew bootRun --args='--spring.profiles.active=dev'
+    args = ["--spring.profiles.active=" + profiles]
+    jvmArgs = ["-noverify", "-XX:+AlwaysPreTouch"]
+}

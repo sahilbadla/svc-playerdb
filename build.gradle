@@ -1,0 +1,52 @@
+plugins {
+	id 'org.springframework.boot' version '2.4.0'
+	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+	id 'java'
+}
+
+group = 'com.intuit'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+	mavenLocal()
+	mavenCentral()
+}
+
+dependencies {
+	// Spring boot dependencies
+	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	runtimeOnly 'com.h2database:h2'
+
+	// Lombok dependencies
+	compileOnly 'org.projectlombok:lombok:1.18.16'
+	annotationProcessor 'org.projectlombok:lombok:1.18.16'
+
+	// Jackson dependencies
+	implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-csv'
+
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+}
+
+
+//Add plugin dependencies
+apply from: 'gradle/swagger/swagger.gradle'
+apply from: 'gradle/micrometer/micrometer.gradle'
+apply from: 'gradle/jvm/jvm.gradle'
+apply from: 'gradle/actuator/actuator.gradle'
+
+test {
+	useJUnitPlatform()
+}
+
+jar {
+	from('src/main/resources') {
+		include  '**/*.properties'
+		include  '**/*.csv'
+	}
+}
