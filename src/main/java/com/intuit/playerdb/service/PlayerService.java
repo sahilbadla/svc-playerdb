@@ -8,10 +8,13 @@ import com.intuit.playerdb.model.Player;
 import com.intuit.playerdb.repository.PlayerRepository;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import static com.intuit.playerdb.exceptions.EntityType.*;
@@ -52,11 +55,25 @@ public class PlayerService implements IPlayerService {
     /**
      * Returns all Player entities in pages
      *
-     * @return Page<Player>
+     * @return Map<String, Object>
      */
     @Override
-    public Page<Player> fetchPlayersPaginated(Pageable paging) {
-        return repository.findAll(paging);
+    public Map<String, Object> fetchPlayersPaginated(int page, int size) {
+        Pageable paging = PageRequest.of(page, size);
+
+        Page<Player> pagePlayer;
+        pagePlayer = repository.findAll(paging);
+        List<Player> players = pagePlayer.getContent();
+        return constructResponseObject(pagePlayer, players);
+    }
+
+    private Map<String, Object> constructResponseObject(Page<Player> pagePlayer, List<Player> players) {
+        Map<String, Object> response = new HashMap<>();
+        response.put("players", players);
+        response.put("currentPage", pagePlayer.getNumber());
+        response.put("totalItems", pagePlayer.getTotalElements());
+        response.put("totalPages", pagePlayer.getTotalPages());
+        return response;
     }
 
     /**
