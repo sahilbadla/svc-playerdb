@@ -29,7 +29,7 @@ public class PlayerController {
     /**
      * GET API to fetch all players
      * Returns an entity of type Response
-     * @return
+     * @return Response
      */
     @GetMapping(value = "/api/players")
     public Response getPlayers(){
@@ -41,7 +41,7 @@ public class PlayerController {
      * Returns an entity of type Response
      * @param page
      * @param size
-     * @return
+     * @return ResponseEntity
      */
     @GetMapping(value = "/api/players/paginated")
     public ResponseEntity<Map<String, Object>> getPlayersPaginated(@RequestParam(defaultValue = "0") int page,
@@ -68,7 +68,7 @@ public class PlayerController {
      * GET API to fetch a players by ID
      * Returns an entity of type Response
      * @param playerID
-     * @return
+     * @return Response
      */
     @GetMapping(value = "/api/players/{playerID}")
     public Response getPlayerById(@PathVariable String playerID){
@@ -80,28 +80,24 @@ public class PlayerController {
      * PUT API to increment a player's weight
      * Returns an entity of type Response
      * @param playerID
-     * @return
+     * @return Response
      */
     @PutMapping(value = "/api/players/{playerID}/weight")
     public Response incrementPlayerWeight(@PathVariable String playerID){
-        Player player = service.fetchPlayerById(playerID);
-        player.setWeight(player.getWeight()+1);
-        service.savePlayer(player);
-        return Response.ok();
+        service.incrementWeight(playerID);
+        return Response.entityUpdated();
     }
 
     /**
      * PUT API to increment a player's height
      * Returns an entity of type Response
      * @param playerID
-     * @return
+     * @return Response
      */
     @PutMapping(value = "/api/players/{playerID}/height")
     public Response incrementPlayerHeight(@PathVariable String playerID){
-        Player player = service.fetchPlayerById(playerID);
-        player.setHeight(player.getHeight()+1);
-        service.savePlayer(player);
-        return Response.ok();
+        service.incrementHeight(playerID);
+        return Response.entityUpdated();
     }
 
 

@@ -11,5 +11,7 @@ public interface IPlayerService {
      Player fetchPlayerById(String playerID);
      List<Player> fetchAllPlayers();
      Page<Player> fetchPlayersPaginated(Pageable paging);
+     void incrementWeight(String playerID);
+     void incrementHeight(String playerID);
      void savePlayer(Player player);
 }

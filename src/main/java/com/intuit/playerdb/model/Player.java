@@ -57,7 +57,7 @@ public class Player {
     @JsonProperty
     private String bats;
     @JsonProperty
-    private String pThrows;
+    private String playerThrows;
     @JsonProperty
     private String debut;
     @JsonProperty

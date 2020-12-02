@@ -24,9 +24,9 @@ public class PlayerdbApplication {
 	@Bean
 	CommandLineRunner initDatabase(PlayerRepository playerRepository) {
 		return args -> {
-			LOGGER.log("Preloading from csv file");
+			LOGGER.info("Preloading from csv file");
 			playerRepository.saveAll(CsvLoaderUtils.read(Player.class, "classpath:People.csv"));
-			LOGGER.log("finished loading from csv data");
+			LOGGER.info("finished loading from csv data");
 		};
 	}
 

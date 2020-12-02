@@ -1,6 +1,6 @@
 # svc-playerdb
 Demo microservice application that loads player profiles from a csv file. 
-This csv is loaded at startup(PlayerdbApplication.java) from location `src/main/resources/People.csv`
+This csv is loaded at startup(see PlayerdbApplication.java) from location `src/main/resources/People.csv`
 
 
 ## Technology ##
@@ -19,7 +19,7 @@ Following libraries were used during the development of this microservice :
 
 go to svc-playerdb root folder and run the following command to build the project:
 
-`./gradlew build`
+`./gradlew clean build`
 
 **Run as docker:**
 
@@ -81,12 +81,11 @@ Example Json output from `GET /api/players/{playerID}`
         "weight": 190,
         "height": 75,
         "bats": "R",
-        "pThrows": "R",
+        "playerThrows": "R",
         "debut": "1962-04-10",
         "finalGame": "1971-09-26",
         "retroID": "aarot101",
-        "bbrefID": "aaronto01",
-        "pthrows": "R"
+        "bbrefID": "aaronto01"
     }
 }
 ```

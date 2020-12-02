@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class LoggerAspect {
 
-    private Logger log;
+    private SimpleLogger LOGGER;
 
     @Pointcut("execution(public * com.intuit.playerdb.service..*(..))")
     public void allMethods() {
@@ -23,15 +23,15 @@ public class LoggerAspect {
 
     @Before("allMethods()")
     public void before(JoinPoint joinPoint) {
-        log = LoggerFactory.getLogger(joinPoint.getTarget().getClass());
-        log.trace("[Enter : {}] with args {}", joinPoint.getSignature().toShortString(), joinPoint.getArgs());
+        LOGGER = new SimpleLogger(LoggerFactory.getLogger(joinPoint.getTarget().getClass()));
+        LOGGER.trace("[Enter : {}] with args {}", joinPoint.getSignature().toShortString(), joinPoint.getArgs());
     }
 
     @AfterReturning(pointcut = "allMethods()", returning = "returnValue")
     public void after(JoinPoint joinPoint, Object returnValue) {
-        log = LoggerFactory.getLogger(joinPoint.getTarget().getClass());
+        LOGGER = new SimpleLogger(LoggerFactory.getLogger(joinPoint.getTarget().getClass()));
         Signature signature = joinPoint.getSignature();
-        log.trace("[Exit : {}] with return type [{}] and value [{}]", signature.toShortString(),
+        LOGGER.trace("[Exit : {}] with return type [{}] and value [{}]", signature.toShortString(),
                 ((MethodSignature) signature).getReturnType(), returnValue);
     }
 }

@@ -13,14 +13,16 @@ public class SimpleLogger {
 
     public void debug(String format, Object... args)
     {
-        if (logger.isDebugEnabled())
-        {
-            logger.debug(String.format(format, args));
-        }
+        logger.debug(String.format(format, args));
     }
 
-    public void log(String format, Object... args)
+    public void info(String format, Object... args)
     {
         logger.info(String.format(format, args));
+    }
+
+    public void trace(String format, Object... args)
+    {
+        logger.trace(String.format(format, args));
     }
 }

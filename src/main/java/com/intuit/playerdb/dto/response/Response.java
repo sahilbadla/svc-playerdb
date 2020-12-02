@@ -71,6 +71,12 @@ public class Response<T> {
         return response;
     }
 
+    public static <T> Response<T> entityUpdated() {
+        Response<T> response = new Response<>();
+        response.setStatus(Status.ENTITY_UPDATED);
+        return response;
+    }
+
     public static <T> Response<T> duplicateEntity() {
         Response<T> response = new Response<>();
         response.setStatus(Status.DUPLICATE_ENTITY);
@@ -86,7 +92,7 @@ public class Response<T> {
     }
 
     public enum Status {
-        OK, BAD_REQUEST, UNAUTHORIZED, VALIDATION_EXCEPTION, EXCEPTION, WRONG_CREDENTIALS, ACCESS_DENIED, NOT_FOUND, DUPLICATE_ENTITY
+        OK, BAD_REQUEST, UNAUTHORIZED, VALIDATION_EXCEPTION, EXCEPTION, WRONG_CREDENTIALS, ACCESS_DENIED, NOT_FOUND, ENTITY_UPDATED, DUPLICATE_ENTITY
     }
 
     @Getter

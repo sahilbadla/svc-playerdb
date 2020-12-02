@@ -75,6 +75,32 @@ public class PlayerService implements IPlayerService {
     }
 
     /**
+     * Increment a Player's weight
+     *
+     * @param playerID
+     * @return void
+     */
+    @Override
+    public void incrementWeight(String playerID){
+        Player player = fetchPlayerById(playerID);
+        player.setWeight(player.getWeight()+1);
+        savePlayer(player);
+    }
+
+    /**
+     * Increment a Player's height
+     *
+     * @param playerID
+     * @return void
+     */
+    @Override
+    public void incrementHeight(String playerID){
+        Player player = fetchPlayerById(playerID);
+        player.setHeight(player.getHeight()+1);
+        savePlayer(player);
+    }
+
+    /**
      * Returns a new RuntimeException
      *
      * @param entityType
